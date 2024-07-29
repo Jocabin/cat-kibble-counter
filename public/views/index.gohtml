@@ -1,0 +1,46 @@
+{{define "index"}}
+    <!DOCTYPE html>
+    <html lang="fr">
+    <head>
+        <meta charset="UTF-8">
+        <title>Compteur croquettes</title>
+        <script defer src="https://unpkg.com/htmx.org@2.0.1"></script>
+    </head>
+    <body>
+
+    <header>
+        <p>{{.Name}}</p>
+        <button>profile</button>
+    </header>
+
+    <main>
+        <ul>
+            {{range .Hours}}
+                <li>
+                    {{if not .Completed}}
+                        <form hx-put="/api/hour/{{.Hour}}" hx-target="this" hx-swap="outerHTML">
+                            <label for="input_{{.Hour}}">{{.Hour}}h : </label>
+                            <input id="input_{{.Hour}}" type="number" name="qty_{{.Hour}}" value="{{.Qty}}">g
+                            <button>Valider</button>
+                        </form>
+                    {{else}}
+                        {{template "hour_line" .}}
+                    {{end}}
+                </li>
+            {{end}}
+        </ul>
+
+        <form>
+            <label for="morning_mash">Pâtée matin</label>
+            <input type="checkbox" name="morning_mash" id="morning_mash">
+
+            <label for="evening_mash">Pâtée soir</label>
+            <input type="checkbox" name="evening_mash" id="evening_mash">
+        </form>
+
+        <p id="overflow">Dépassement : {{.Overflow}}</p>
+    </main>
+
+    </body>
+    </html>
+{{end}}

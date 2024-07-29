@@ -1,0 +1,1 @@
+[{"Name":"Lundi","MaxQty":50,"Overflow":60165,"Date":"29/07/2024","MorningMash":false,"EveningMash":false,"Hours":[{"Hour":6,"Qty":100,"Completed":true},{"Hour":9,"Qty":100,"Completed":true},{"Hour":12,"Qty":3,"Completed":true},{"Hour":15,"Qty":2,"Completed":true},{"Hour":18,"Qty":10,"Completed":true},{"Hour":21,"Qty":60000,"Completed":true}]}]

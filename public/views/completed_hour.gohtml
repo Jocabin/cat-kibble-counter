@@ -1,0 +1,5 @@
+{{define "completed_hour"}}
+    {{template "hour_line" .NewHour}}
+
+    <p id="overflow" hx-swap-oob="true">Dépassement : {{.Overflow}}</p>
+{{end}}
