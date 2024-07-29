@@ -6,6 +6,7 @@ import (
 	"io"
 	"net/http"
 	"strconv"
+	"time"
 )
 
 type Template struct {
@@ -24,6 +25,7 @@ type HourInfo struct {
 
 type DayInfo struct {
 	Name        string
+	BaseQty     int
 	MaxQty      int
 	Overflow    int
 	Date        string
@@ -34,6 +36,7 @@ type DayInfo struct {
 
 func main() {
 	e := echo.New()
+	e.Static("/dist", "dist")
 
 	renderer := &Template{
 		templates: template.Must(template.ParseGlob("public/views/*.gohtml")),
@@ -41,9 +44,18 @@ func main() {
 	e.Renderer = renderer
 
 	e.GET("/", func(c echo.Context) error {
+		days := GetAllDays()
 		day := GetCurrentDay()
+		currentDate := time.Now()
 
-		return c.Render(http.StatusOK, "index", day)
+		if day.Date != currentDate.Format("02/01/2006") {
+			_ = AddNewDay(currentDate)
+		}
+
+		return c.Render(http.StatusOK, "index", map[string]interface{}{
+			"CurrentDay": day,
+			"History":    days,
+		})
 	})
 
 	//front api

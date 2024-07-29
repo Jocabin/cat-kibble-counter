@@ -4,23 +4,35 @@
     <head>
         <meta charset="UTF-8">
         <title>Compteur croquettes</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1"/>
         <script defer src="https://unpkg.com/htmx.org@2.0.1"></script>
+        <link rel="stylesheet" href="/dist/main.css">
+        <link rel="icon" type="image/svg+xml" href="/dist/favicon.svg"/>
     </head>
     <body>
 
     <header>
-        <p>{{.Name}}</p>
-        <button>profile</button>
+        <p>{{.CurrentDay.Name}}</p>
+{{/*        <button>profile</button>*/}}
+        <button><label for="showHistory">Historique</label></button>
     </header>
+
+    <input type="checkbox" id="showHistory">
+    <div>
+        {{range .History}}
+            <p>{{.Date}} - Dépassement: {{.Overflow}}g</p>
+        {{end}}
+    </div>
 
     <main>
         <ul>
-            {{range .Hours}}
+            {{$BaseQty := .CurrentDay.BaseQty}}
+            {{range .CurrentDay.Hours}}
                 <li>
                     {{if not .Completed}}
                         <form hx-put="/api/hour/{{.Hour}}" hx-target="this" hx-swap="outerHTML">
                             <label for="input_{{.Hour}}">{{.Hour}}h : </label>
-                            <input id="input_{{.Hour}}" type="number" name="qty_{{.Hour}}" value="{{.Qty}}">g
+                            <input id="input_{{.Hour}}" type="number" name="qty_{{.Hour}}" value="{{$BaseQty}}">g
                             <button>Valider</button>
                         </form>
                     {{else}}
@@ -30,16 +42,18 @@
             {{end}}
         </ul>
 
-        <form>
+        {{/*<form>
             <label for="morning_mash">Pâtée matin</label>
             <input type="checkbox" name="morning_mash" id="morning_mash">
 
             <label for="evening_mash">Pâtée soir</label>
             <input type="checkbox" name="evening_mash" id="evening_mash">
-        </form>
-
-        <p id="overflow">Dépassement : {{.Overflow}}</p>
+        </form>*/}}
     </main>
+
+    <footer>
+        <p id="overflow">Dépassement : {{.CurrentDay.Overflow}}</p>
+    </footer>
 
     </body>
     </html>
