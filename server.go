@@ -73,5 +73,18 @@ func main() {
 		})
 	})
 
+	e.DELETE("/api/hour/:hour", func(c echo.Context) error {
+		hour := c.Param("hour")
+		hourInt, _ := strconv.Atoi(hour)
+
+		deletedHour := DeleteHour(hourInt)
+		overflow := GetOverflow()
+
+		return c.Render(http.StatusOK, "uncompleted_hour", map[string]interface{}{
+			"NewHour":  deletedHour,
+			"Overflow": overflow,
+		})
+	})
+
 	e.Logger.Fatal(e.Start(":4321"))
 }

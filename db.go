@@ -102,3 +102,32 @@ func AddNewDay(date time.Time) DayInfo {
 
 	return newDay
 }
+
+func DeleteHour(hour int) HourInfo {
+	days := GetAllDays()
+	currentDay := &days[len(days)-1]
+
+	var index = 0
+	var accumQty = 0
+
+	for i, h := range currentDay.Hours {
+		if h.Hour == hour {
+			index = i
+		}
+		accumQty += h.Qty
+	}
+	accumQty -= currentDay.Hours[index].Qty
+
+	currentDay.Hours[index].Qty = 0
+	currentDay.Hours[index].Completed = false
+	currentDay.Overflow = max(accumQty-currentDay.MaxQty, 0)
+
+	newDBContent, _ := json.Marshal(days)
+	err := os.WriteFile("db.json", newDBContent, 0644)
+
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	return currentDay.Hours[index]
+}

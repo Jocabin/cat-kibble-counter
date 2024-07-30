@@ -1,3 +1,6 @@
 {{define "hour_line"}}
-    <p>{{.Hour}}h : {{.Qty}}g</p>
+    <div id="completedLine{{.Hour}}">
+        <p>{{.Hour}}h : {{.Qty}}g</p>
+        <button hx-delete="/api/hour/{{.Hour}}" hx-target="#completedLine{{.Hour}}" hx-swap="outerHTML">Supprimer</button>
+    </div>
 {{end}}
