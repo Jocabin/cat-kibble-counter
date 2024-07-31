@@ -3,3 +3,4 @@ db.json
 compteur-croquettes
 tmp
 .air.toml
+.DS_Store

@@ -1,0 +1,17 @@
+{
+  "lang": "fr-FR",
+  "name": "Compteur Croquettes",
+  "short_name": "Compteur Croquettes",
+  "description": "Une application pour compter les croquettes données à son chat",
+  "start_url": "/",
+  "background_color": "#fff",
+  "theme_color": "#F98A10",
+  "orientation": "portrait",
+  "display": "standalone",
+  "icons": [
+    {
+      "src": "/dist/logo.svg",
+      "sizes": "512x512"
+    }
+  ]
+}

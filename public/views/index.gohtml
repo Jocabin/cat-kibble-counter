@@ -9,6 +9,7 @@
         <link rel="preload" href="/dist/font.otf" as="font" type="font/otf" crossorigin/>
         <link rel="stylesheet" href="/dist/main.css">
         <link rel="icon" type="image/svg+xml" href="/dist/logo.svg"/>
+        <link rel="manifest" href="/dist/manifest.json">
 
         <script defer src="https://unpkg.com/htmx.org@2.0.1"></script>
     </head>
@@ -53,6 +54,12 @@
     <footer>
         {{template "overflow_text" .CurrentDay.Overflow}}
     </footer>
+
+    <script>
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('/sw.js', {scope: '/'});
+        }
+    </script>
 
     </body>
     </html>
