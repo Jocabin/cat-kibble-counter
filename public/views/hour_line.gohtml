@@ -1,6 +1,9 @@
 {{define "hour_line"}}
-    <div id="completedLine{{.Hour}}">
-        <p>{{.Hour}}h : {{.Qty}}g</p>
-        <button hx-delete="/api/hour/{{.Hour}}" hx-target="#completedLine{{.Hour}}" hx-swap="outerHTML">Supprimer</button>
+    <div class="completedLine" id="completedLine{{.Hour}}">
+        <p>{{.Hour}}h</p>
+        <p>{{.Qty}}g</p>
+        <button hx-delete="/api/hour/{{.Hour}}" hx-target="#completedLine{{.Hour}}" hx-swap="outerHTML">
+            <img src="/dist/delete.svg" alt="supprimer">
+        </button>
     </div>
 {{end}}

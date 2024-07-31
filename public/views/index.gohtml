@@ -2,27 +2,30 @@
     <!DOCTYPE html>
     <html lang="fr">
     <head>
-        <meta charset="UTF-8">
         <title>Compteur croquettes</title>
+        <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1"/>
-        <script defer src="https://unpkg.com/htmx.org@2.0.1"></script>
+
+        <link rel="preload" href="/dist/font.otf" as="font" type="font/otf" crossorigin/>
         <link rel="stylesheet" href="/dist/main.css">
-        <link rel="icon" type="image/svg+xml" href="/dist/favicon.svg"/>
+        <link rel="icon" type="image/svg+xml" href="/dist/logo.svg"/>
+
+        <script defer src="https://unpkg.com/htmx.org@2.0.1"></script>
     </head>
     <body>
 
     <header>
-        <p>{{.CurrentDay.Name}}</p>
-{{/*        <button>profile</button>*/}}
-        <button><label for="showHistory">Historique</label></button>
+        <p>{{/*{{.CurrentDay.Name}}*/}}</p>
+        <img src="/dist/logo.svg" alt="logo app">
+        <button><label for="showSettings"><img src="/dist/settings.svg" alt="roue crantée"></label></button>
     </header>
 
-    <input type="checkbox" id="showHistory">
-    <div>
+    <input type="checkbox" id="showSettings">
+    <dialog>
         {{range .History}}
             <p>{{.Date}} - Dépassement: {{.Overflow}}g</p>
         {{end}}
-    </div>
+    </dialog>
 
     <main>
         <ul>
@@ -48,7 +51,7 @@
     </main>
 
     <footer>
-        <p id="overflow">Dépassement : {{.CurrentDay.Overflow}}</p>
+        {{template "overflow_text" .CurrentDay.Overflow}}
     </footer>
 
     </body>

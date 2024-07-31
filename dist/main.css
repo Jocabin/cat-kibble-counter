@@ -1,6 +1,13 @@
+@font-face {
+    font-family: "Font";
+    src: url("/dist/font.otf");
+    font-display: swap;
+}
+
 *, *::before, *::after {
     box-sizing: border-box;
     margin: 0;
+    color: var(--noir);
 }
 
 html, body {
@@ -14,32 +21,51 @@ body {
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
+    font-family: 'Font', sans-serif;
+
+    --orange: #F98A10;
+    --noir: #041926;
 }
 
 header {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
     align-items: center;
+    justify-items: center;
+
     width: 100%;
-    padding: 1rem;
+    padding: 2rem;
 }
 
-#showHistory {
+header > button {
+    background: none;
+    border: none;
+    justify-self: end;
+}
+
+#showSettings {
     display: none;
 }
 
-#showHistory + div {
+#showSettings + dialog {
     display: none;
     position: absolute;
     border: 2px solid black;
-    inset: 25% 1rem 25% 1rem;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: min(100%, 350px);
     background: white;
     z-index: 999;
+    box-shadow: 0 0 200px gray;
 }
 
-#showHistory:checked + div {
+#showSettings:checked + dialog {
     display: block;
+}
+
+main {
+    width: 100%;
 }
 
 main ul {
@@ -50,10 +76,51 @@ main ul {
     gap: 1rem;
     justify-content: center;
     align-items: center;
+    width: min(100%, 300px);
+    margin: 0 auto;
+}
+
+main ul li {
+    width: 100%;
+}
+
+.completedLine, .uncompletedLine {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    flex-direction: row;
+    justify-items: center;
+    align-items: center;
+}
+
+.completedLine > button, .uncompletedLine > button {
+    border: none;
+    background: none;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.uncompletedLine input {
+    max-width: 4rem;
+    font-family: 'Font', sans-serif;
+    font-size: 1rem;
+    text-align: center;
+    border: 0;
+    border-bottom: 1px solid var(--orange);
 }
 
 footer {
     padding: 1rem;
     width: 100%;
     text-align: center;
+}
+
+#overflow {
+    padding: 2rem;
+    text-transform: uppercase;
+}
+
+#overflow > span {
+    color: var(--orange);
 }

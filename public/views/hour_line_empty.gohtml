@@ -1,7 +1,9 @@
 {{define "hour_line_empty"}}
-    <form hx-put="/api/hour/{{.Hour}}" hx-target="this" hx-swap="outerHTML">
-        <label for="input_{{.Hour}}">{{.Hour}}h : </label>
-        <input id="input_{{.Hour}}" type="number" name="qty_{{.Hour}}" value="10">g
-        <button>Valider</button>
+    <form class="uncompletedLine" hx-put="/api/hour/{{.Hour}}" hx-target="this" hx-swap="outerHTML">
+        <label for="input_{{.Hour}}">{{.Hour}}h</label>
+        <input id="input_{{.Hour}}" type="number" name="qty_{{.Hour}}" value="10">
+        <button>
+            <img src="/dist/check.svg" alt="valider">
+        </button>
     </form>
 {{end}}

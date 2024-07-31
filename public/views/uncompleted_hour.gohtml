@@ -1,5 +1,5 @@
 {{define "uncompleted_hour"}}
     {{template "hour_line_empty" .NewHour}}
 
-    <p id="overflow" hx-swap-oob="true">Dépassement : {{.Overflow}}</p>
+    {{template "overflow_text" .Overflow}}
 {{end}}
