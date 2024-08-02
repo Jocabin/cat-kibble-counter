@@ -37,7 +37,7 @@ type DayInfo struct {
 func main() {
 	e := echo.New()
 	e.Static("/dist", "dist")
-	e.File("/sw.js", "sw.js")
+	//e.File("/sw.js", "sw.js")
 
 	renderer := &Template{
 		templates: template.Must(template.ParseGlob("public/views/*.gohtml")),
